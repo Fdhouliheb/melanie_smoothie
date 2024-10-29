@@ -27,7 +27,7 @@ ingredients_list = st.multiselect(
 )
 
 # Process ingredients selection
-    if ingredients_list:
+if ingredients_list:
         ingredients_string = ' '.join(ingredients_list)  # Join selected ingredients into a single string
         for fruit_chosen in ingredients_list:
             try:
