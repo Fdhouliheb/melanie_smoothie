@@ -36,8 +36,15 @@ if ingredients_list:
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
         st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
 
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_chosen)
-        fv_dt = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
+        fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_chosen}")
+        if fruityvice_response.status_code == 200:
+          try:
+            fv_data = fruityvice_response.json()
+            fv_dt = st.dataframe(data=fv_data, use_container_width=True)
+          except ValueError:
+            st.error("Received a non-JSON response from the API.")
+        else:
+          st.error(f"API request failed with status code: {fruityvice_response.status_code}")
 
     st.write(ingredients_string)
 
