@@ -36,7 +36,7 @@ if ingredients_list:
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
         st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
 
-        fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_chosen}")
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_chosen)
         if fruityvice_response.status_code == 200:
           try:
             fv_data = fruityvice_response.json()
